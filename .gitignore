@@ -1,0 +1,4 @@
+node_modules/
+dist/
+blah.md
+.env
