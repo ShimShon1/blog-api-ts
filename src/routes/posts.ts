@@ -1,8 +1,8 @@
 const { body, validationResult } = require("express-validator");
 const Post = require("../models/Post");
 const { commentValidation } = require("../validators");
-
-const router = require("express").Router();
+import express from "express";
+const router = express.Router();
 
 router.get("/", async function (req, res) {
   try {

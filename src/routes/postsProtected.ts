@@ -4,7 +4,8 @@ const {
   commentValidation,
   postValidation,
 } = require("../validators");
-const router = require("express").Router();
+import express from "express";
+const router = express.Router();
 
 router.get("/", async function (req, res) {
   try {
@@ -122,7 +123,7 @@ router.delete("/:postId/:commentId", async function (req, res, next) {
   try {
     const post = await Post.findById(req.params.postId);
     post.comments = post.comments.filter(
-      (comment) => comment._id != req.params.commentId
+      (comment: any) => comment._id != req.params.commentId
     );
     await post.save();
     return res.status(200).json({
