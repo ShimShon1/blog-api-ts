@@ -1,16 +1,17 @@
 import express, { NextFunction, Request, Response } from "express";
-const mongoose = require("mongoose");
-const PostsRouter = require("./routes/posts");
-const IndexRouter = require("./routes/index");
-const ProtectedPostsRouter = require("./routes/postsProtected");
-const jwt = require("jsonwebtoken");
-const cors = require("cors");
+import mongoose from "mongoose";
+import PostsRouter from "./routes/posts";
+import IndexRouter from "./routes/index";
+import ProtectedPostsRouter from "./routes/postsProtected";
+import jwt from "jsonwebtoken";
+import cors from "cors";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import dotenv from "dotenv";
 const app = express();
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
-require("dotenv").config();
+dotenv.config();
 
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect(process.env.DB_LINK);
 app.use(express.json());

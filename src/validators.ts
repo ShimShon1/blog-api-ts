@@ -1,5 +1,4 @@
-const { body } = require("express-validator");
-
+import { body } from "express-validator";
 const titleValidation = body("title")
   .isString()
   .trim()
@@ -28,15 +27,15 @@ const isPublicValidation = body("isPublic")
   .withMessage("isPublic must be a Boolean");
 
 //validate comment model
-exports.commentValidation = [
+export const commentValidation = [
   userValidation,
   titleValidation,
   contentValidation,
 ];
-exports.postValidation = [
+export const postValidation = [
   isPublicValidation,
   titleValidation,
   contentValidation,
 ];
 
-exports.loginValidation = [userValidation, passwordValidation];
+export const loginValidation = [userValidation, passwordValidation];

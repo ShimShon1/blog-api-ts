@@ -1,9 +1,6 @@
-const { body, validationResult } = require("express-validator");
-const Post = require("../models/Post");
-const {
-  commentValidation,
-  postValidation,
-} = require("../validators");
+import { validationResult } from "express-validator";
+import Post from "../models/Post";
+import { postValidation } from "../validators";
 import express from "express";
 const router = express.Router();
 
@@ -137,4 +134,4 @@ router.delete("/:postId/:commentId", async function (req, res, next) {
   }
 });
 
-module.exports = router;
+export default router;

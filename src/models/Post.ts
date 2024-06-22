@@ -1,5 +1,4 @@
-const { default: mongoose } = require("mongoose");
-
+import mongoose from "mongoose";
 const PostSchema = new mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
@@ -18,4 +17,4 @@ const PostSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+export default mongoose.model("Post", PostSchema);

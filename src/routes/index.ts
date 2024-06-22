@@ -1,9 +1,9 @@
 import express from "express";
+import jwt from "jsonwebtoken";
+import User from "../models/User";
+import { loginValidation } from "../validators";
+import { validationResult } from "express-validator";
 const router = express.Router();
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-const { loginValidation } = require("../validators");
-const { validationResult } = require("express-validator");
 router.post(
   "/login",
   loginValidation,
@@ -29,4 +29,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export default router;

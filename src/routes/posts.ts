@@ -1,6 +1,6 @@
-const { body, validationResult } = require("express-validator");
-const Post = require("../models/Post");
-const { commentValidation } = require("../validators");
+import { validationResult } from "express-validator";
+import Post from "../models/Post";
+import { commentValidation } from "../validators";
 import express from "express";
 const router = express.Router();
 
@@ -93,4 +93,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export default router;
