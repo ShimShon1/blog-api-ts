@@ -4,9 +4,9 @@ const titleValidation = body("title")
   .trim()
   .isLength({
     min: 2,
-    max: 25,
+    max: 100,
   })
-  .withMessage("title be between 2 and 25 characters.");
+  .withMessage("title be between 2 and 100 characters.");
 const postContentValidation = body("content")
   .isString()
   .trim()
