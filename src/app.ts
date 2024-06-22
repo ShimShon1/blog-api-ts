@@ -1,4 +1,4 @@
-const express = require("express");
+import express, { NextFunction, Request, Response } from "express";
 const mongoose = require("mongoose");
 const PostsRouter = require("./routes/posts");
 const IndexRouter = require("./routes/index");
@@ -9,6 +9,8 @@ const app = express();
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 require("dotenv").config();
+
+const PORT = process.env.PORT || 2000;
 
 mongoose.connect(process.env.DB_LINK);
 app.use(express.json());
@@ -22,8 +24,15 @@ app.use(
     legacyHeaders: false,
   })
 );
-async function verifyUser(req, res, next) {
+
+async function verifyUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
+    res.status;
+    const authenticationToken = req.headers["authorization"];
     const token = req.headers.authorization.split(" ")[1];
     const verify = jwt.verify(token, process.env.JWT_SECRET);
     if (!verify) {
@@ -44,4 +53,6 @@ app.get("/api/isLogged", (req, res) => {
 });
 app.use("/api/protected/posts", ProtectedPostsRouter, verifyUser);
 
-app.listen(process.env.PORT || 3000);
+http: app.listen(PORT, () => {
+  console.log(`App running on http://localhost:${PORT}/api`);
+});

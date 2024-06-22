@@ -1,4 +1,5 @@
-const router = require("express").Router();
+import express from "express";
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const { loginValidation } = require("../validators");

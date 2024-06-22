@@ -5,6 +5,8 @@
     "rootDir": "src",
     "sourceMap": true,
     "noImplicitAny": true,
-    "strict": true
+    "strict": false,
+    "noEmitOnError": false,
+    "forceConsistentCasingInFileNames": true
   }
 }
