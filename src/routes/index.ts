@@ -7,7 +7,11 @@ const router = express.Router();
 router.post(
   "/login",
   loginValidation,
-  async function (req, res, next) {
+  async function (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

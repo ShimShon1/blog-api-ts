@@ -57,30 +57,38 @@ router.get("/:postId", async function (req, res) {
 });
 
 // POST a post
-router.post("/", postValidation, async function (req, res, next) {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+router.post(
+  "/",
+  postValidation,
+  async function (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+      const newPost = new Post({
+        title: req.body.title,
+        content: req.body.content,
+        isPublic: req.body.isPublic,
+        date: new Date(),
+      });
+      await newPost.save();
+      return res.status(201).json({ post: newPost });
+    } catch (error) {
+      res.status(500).json({ errors: [{ msg: "Unexpected Error" }] });
+    }
   }
-  try {
-    const newPost = new Post({
-      title: req.body.title,
-      content: req.body.content,
-      isPublic: req.body.isPublic,
-      date: new Date(),
-    });
-    await newPost.save();
-    return res.status(201).json({ post: newPost });
-  } catch (error) {
-    res.status(500).json({ errors: [{ msg: "Unexpected Error" }] });
-  }
-});
+);
 
 // PUT a post
 router.put(
   "/:postId",
   postValidation,
-  async function (req, res, next) {
+  async function (req: express.Request, res: express.Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -120,8 +128,8 @@ router.delete("/:postId/:commentId", async function (req, res, next) {
   try {
     const post = await Post.findById(req.params.postId);
     post.comments = post.comments.filter(
-      (comment: any) => comment._id != req.params.commentId
-    );
+      (comment) => !comment._id.equals(req.params.commentId)
+    ) as any;
     await post.save();
     return res.status(200).json({
       msg: "Comment deleted",

@@ -67,7 +67,7 @@ router.get("/:postId", async function (req, res) {
 router.post(
   "/:postId/comments",
   commentValidation,
-  async function (req, res, next) {
+  async function (req: express.Request, res: express.Response) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

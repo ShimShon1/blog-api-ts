@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import PostsRouter from "./routes/posts";
 import IndexRouter from "./routes/index";
@@ -27,9 +27,9 @@ app.use(
 );
 
 async function verifyUser(
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
 ) {
   try {
     res.status;
